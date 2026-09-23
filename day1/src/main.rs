@@ -15,8 +15,8 @@ fn part1(filename: &str) -> Result<u32, ()> {
     let numbers = read_numbers(filename);
     for i in 0..numbers.len() - 1 {
         for j in i..numbers.len() {
-            if numbers[i] + numbers [j] == EXPECTED_SUM {
-                return Ok(numbers[i]*numbers[j]);
+            if numbers[i] + numbers[j] == EXPECTED_SUM {
+                return Ok(numbers[i] * numbers[j]);
             }
         }
     }
@@ -28,7 +28,7 @@ fn part2(filename: &str) -> Result<u32, ()> {
     for i in 0..numbers.len() - 2 {
         for j in i..numbers.len() - 1 {
             for k in j..numbers.len() {
-                if numbers[i] + numbers [j] + numbers[k] == EXPECTED_SUM {
+                if numbers[i] + numbers[j] + numbers[k] == EXPECTED_SUM {
                     return Ok(numbers[i] * numbers[j] * numbers[k]);
                 }
             }
@@ -41,7 +41,9 @@ fn read_numbers(filename: &str) -> Vec<u32> {
     let mut f = File::open(filename).unwrap();
     let mut buf = String::new();
     f.read_to_string(&mut buf).unwrap();
-    buf.lines().map(|line| u32::from_str(line).unwrap()).collect()
+    buf.lines()
+        .map(|line| u32::from_str(line).unwrap())
+        .collect()
 }
 
 #[test]
