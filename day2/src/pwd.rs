@@ -1,5 +1,10 @@
 use regex::Regex;
 use std::str::FromStr;
+use std::sync::LazyLock;
+
+static REGEX: LazyLock<Regex> = LazyLock::new(|| {
+    Regex::new(r"(\d+)-(\d+) (.): (.*)").unwrap()
+});
 
 pub struct Rules {
     pub min: u8,
@@ -8,8 +13,7 @@ pub struct Rules {
 }
 
 pub fn from_string(data: &str) -> (Rules, String) {
-    let regex = Regex::new(r"(\d+)-(\d+) (.): (.*)").expect("Failed to parse regex");
-    let captures = regex.captures(data).unwrap();
+    let captures = REGEX.captures(data).unwrap();
     (
         Rules {
             min: u8::from_str(captures.get(1).unwrap().as_str()).unwrap(),
