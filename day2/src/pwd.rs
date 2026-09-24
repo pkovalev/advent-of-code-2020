@@ -2,9 +2,7 @@ use regex::Regex;
 use std::str::FromStr;
 use std::sync::LazyLock;
 
-static REGEX: LazyLock<Regex> = LazyLock::new(|| {
-    Regex::new(r"(\d+)-(\d+) (.): (.*)").unwrap()
-});
+static REGEX: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"(\d+)-(\d+) (.): (.*)").unwrap());
 
 pub struct Rules {
     pub min: u8,
